@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>id</title>
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+     <!-- fountawsome-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <h1 class="text-center text-primary">Id</h1>
+    <div class="row w-100 ms-5 mt-5" id="crd">
+
+    </div>
+</body>
+<script>
+    const id=new XMLHttpRequest()
+    id.open('get','https://jsonplaceholder.typicode.com/users')
+    id.send()
+
+    id.onreadystatechange=()=>{
+        console.log(id.readyState)
+        if(id.readyState ==4){
+            if(id.status >=200 && id.status<300){
+                details=JSON.parse(id.responseText)
+                details.forEach(item=>{
+                    crd.innerHTML+=`<div class='col-md-3 mb-3'>
+                        <div class="card shadow" style="width: 18rem;">
+                            <div class="card-body">
+                            <h5 class="card-title">Name : ${item.name}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Id : ${item.id}</h6>
+                            <h5 class="card-text">city: ${item['address'].city}</h5>
+                            <h5 class="card-text">company: ${item['company'].name}</h5>
+                            <a href="#" class="card-link" style='text-decoration:none'>email : ${item.email}</a>
+                            </div>
+                            </div>
+                        </div>`
+                })
+            }
+            else{
+                console.log('no proper responce')
+            }
+        }
+        else{
+            console.log('no responce')
+        }
+    }
+</script>
+</html>
